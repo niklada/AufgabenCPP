@@ -1,0 +1,9 @@
+class MeineKlasse
+
+private
+int zuLesenAberNichtAendern
+
+public
+const int readOnlyAttribut= &zuLesenAberNichtAendern //speichert eine referenz auf zuLesenAberNichtAendern
+//, die allerdings nciht geaendert werden kann;
+void aendern(...) //aendert zuLesenAberNichtAendern 
