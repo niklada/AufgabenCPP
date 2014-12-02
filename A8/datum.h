@@ -18,7 +18,8 @@ class Datum {
     int monat() const;
     int jahr()  const;
     friend ostream& operator<<(ostream& o,Datum& d){
-      o<<d.tag_<<"."<<d.monat_<<"."<<d.jahr_<<endl;
+     // o<<d.tag_<<"."<<d.monat_<<"."<<d.jahr_<<endl;
+      o<< string(d)<<endl;
       return o;
     }
     bool operator==(Datum& d){
@@ -70,8 +71,12 @@ inline bool istSchaltjahr(int jahr)  {
 }
 inline bool operator<(const Datum& a,const Datum& d){
       if(a.jahr()<d.jahr()) return true;
-      if(a.monat()<d.monat()) return true;
-      if(a.tag()<d.tag()) return true;
+	if(a.jahr()==d.jahr()){
+	  if(a.monat()<d.monat()) return true;
+	  if(a.monat()==d.monat()){
+	    if(a.tag()<d.tag()) return true;
+	  }
+	}
       return false;
     }
 

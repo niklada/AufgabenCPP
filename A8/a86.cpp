@@ -2,8 +2,9 @@
 #include "datum.h"
 using namespace std;
 int main(){
-  Datum a(12,11,2000);
-  Datum b(11,10,2002);
+  Datum a(3,3,1995);
+  Datum b;
+  b.aktuell();
   if(a!=b)
     cout <<"ungleich!"<<endl;
   if(a==b)

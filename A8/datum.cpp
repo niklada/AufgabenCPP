@@ -1,11 +1,26 @@
 #include"datum.h"
 #include<ctime>
 #include<cassert>  // besser: Exception verwenden
-
+#include "UngueltigesDatumException.h"
 Datum::Datum()  { aktuell();}
 
 void Datum::set(int t, int m, int j) {
-   assert(istGueltigesDatum(t, m, j));
+   if(!istGueltigesDatum(t, m, j)){
+      std::string temp("tt.mm.jjjj");
+              // implizite Umwandlung in char
+    temp[0] = t/10 +'0';
+    temp[1] = t%10 +'0';
+    temp[3] = m/10 +'0';
+    temp[4] = m%10 +'0';
+    int pos = 9;                 // letzte Jahresziffer
+    int jt = j;
+    while(jt > 0) {
+       temp[pos] = jt % 10 + '0';  // letzte Ziffer
+       jt = jt/10;                  // letzte Ziffer abtrennen
+       --pos;
+    }
+    throw UngueltigesDatumException(temp);
+  }
     // besser: Exception verwenden, siehe Übungsaufgabe
     tag_ = t;
     monat_ = m;
@@ -69,20 +84,27 @@ bool istGueltigesDatum(int t, int m, int j) {
             && t  >= 1    && t   <= tmp[m-1];
 }
 int DatumDifferenz(const Datum& a, const Datum& b){
+
   int diff=0;
   Datum at=a;
   Datum bt=b;
-  if(a<b){
+  if(b<a){
     //a und b tasuchen
     at=b;
     bt=a;
   }
+  while(at<bt){
+    diff++;
+    at++;
+  }
+/*
   int jahresdiff=at.jahr()-bt.jahr();
   diff+=(jahresdiff)*365;
   int tagesdiff=at.tag()-bt.tag();
   diff+=tagesdiff;
   int monatsdiff= at.monat()-bt.monat();
   diff+=monatsdiff*30;
-  return diff;
+  return diff;*/
+return diff;
 }
 
