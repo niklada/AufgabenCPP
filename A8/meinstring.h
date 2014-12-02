@@ -29,6 +29,14 @@ class MeinString {
   const char operator[](int x){
     return this->at(x); 
   }
+  void operator+=(MeinString & m){
+    this->insert(this->length(),m);
+  }
+  MeinString operator+(MeinString& pl){
+    MeinString toReturn(*this);
+    toReturn+=pl;
+    return toReturn;
+  }
   friend ostream& operator<<(ostream& o, MeinString& t){
     o<<(t.c_str())<<endl;
     return o;
