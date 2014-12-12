@@ -61,4 +61,5 @@ int main(){
   for(int i=0; i<vec.size();i++){
     cout<<vec[i]->first<<" Vorkommen: "<<vec[i]->second<<endl;
   }
+  
 }
