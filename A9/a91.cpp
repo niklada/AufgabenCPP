@@ -58,7 +58,7 @@ int main(){
     
   }
   sort(vec.begin(),vec.end(), a);
-  for(int i=0; i<vec.size();i++){
+  for(int i=0; i<(vec.size()>20 ? 20 : vec.size());i++){
     cout<<vec[i]->first<<" Vorkommen: "<<vec[i]->second<<endl;
   }
   
